@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Контакты</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="menu">
+        <a href="index.html" class="button">🎲 Генератор</a>
+        <a href="catalog.html" class="button">📚 Жанры</a>
+        <a href="gallery.html" class="button">🖼️ Галерея</a>
+        <a href="contacts.html" class="button">✉️ Контакты</a>
+    </div>
+
+    <div class="container">
+        <h1>✉️ Связь и полезные мелочи</h1>
+
+        <div class="contact-grid">
+            <div class="contact-info">
+                <h2>📞 Контакты</h2>
+                <ul>
+                    <li>📧 gamedev.ideas@example.com</li>
+                    <li>💬 Telegram: @game_ideas</li>
+                </ul>
+                <h2>🏷️ Генератор названий</h2>
+                <button class="action-btn" id="nameBtn">✨ Случайное название</button>
+                <p id="generatedName" class="name-result"></p>
+            </div>
+
+            <div class="contact-form">
+                <h2>📝 Напиши нам</h2>
+                <form id="feedbackForm">
+                    <input type="text" id="name" placeholder="Твоё имя" required>
+                    <input type="email" id="email" placeholder="Email" required>
+                    <textarea id="msg" rows="4" placeholder="Твоё сообщение" required></textarea>
+                    <button type="button" id="submitBtn">📨 Отправить</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const gameNames = ["Dark Echo", "Solar Winds", "Crystal Core", "Iron Harvest", "Neon Shadows", 
+                           "Frostbound", "Emberfall", "Star Nomad", "Hollow Signal", "Titan Spire"];
+        
+        document.getElementById('nameBtn').onclick = () => {
+            const randomName = gameNames[Math.floor(Math.random() * gameNames.length)];
+            document.getElementById('generatedName').innerHTML = `🎮 ${randomName}`;
+        };
+
+        document.getElementById('submitBtn').onclick = () => {
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const msg = document.getElementById('msg').value.trim();
+            if (!name || !email || !msg) alert("Заполни все поля!");
+            else if (!email.includes('@')) alert("Введи корректный email");
+            else {
+                alert(`Спасибо, ${name}! Сообщение отправлено.`);
+                document.getElementById('feedbackForm').reset();
+            }
+        };
+    </script>
+</body>
+</html>
+

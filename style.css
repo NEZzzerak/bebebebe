@@ -1,0 +1,43 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #1e1e2f, #2a2a40);
+    color: #eee;
+    margin: 0;
+    padding: 0;
+}
+.menu { text-align: center; padding: 20px; background: rgba(0,0,0,0.4); position: sticky; top: 0; }
+.button {
+    background: #7c3aed; color: white; padding: 10px 22px; margin: 5px;
+    text-decoration: none; display: inline-block; border-radius: 25px;
+    font-weight: bold; transition: 0.2s;
+}
+.button:hover { background: #6d28d9; transform: scale(1.03); }
+.container { max-width: 1100px; margin: 30px auto; padding: 25px; background: rgba(255,255,255,0.08); border-radius: 25px; }
+h1, h2 { color: #c084fc; text-align: center; }
+.action-btn, .save-btn, .reset-btn {
+    border: none; padding: 12px 25px; margin: 10px; border-radius: 30px;
+    font-weight: bold; cursor: pointer; transition: 0.2s;
+}
+.action-btn { background: #10b981; color: white; }
+.action-btn:hover { background: #059669; }
+.save-btn { background: #3b82f6; color: white; }
+.save-btn:hover { background: #2563eb; }
+.reset-btn { background: #ef4444; color: white; }
+.reset-btn:hover { background: #dc2626; }
+.idea-card { background: #2d2d44; border-radius: 20px; padding: 25px; margin: 20px 0; text-align: center; border-left: 5px solid #c084fc; }
+.task-item { background: #2d2d44; margin: 10px 0; padding: 12px; border-radius: 12px; display: flex; justify-content: space-between; align-items: center; }
+.task-delete { background: #ef4444; color: white; border: none; padding: 5px 12px; border-radius: 15px; cursor: pointer; }
+.empty-hint { text-align: center; color: #aaa; padding: 20px; }
+.gallery-grid { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; }
+.gallery-item { background: #2d2d44; border-radius: 15px; padding: 10px; width: 250px; text-align: center; }
+.gallery-item img { width: 100%; border-radius: 12px; height: 170px; object-fit: cover; }
+.like-btn { background: #ec489a; color: white; border: none; padding: 8px 16px; border-radius: 20px; margin-top: 8px; cursor: pointer; }
+.contact-grid { display: flex; flex-wrap: wrap; gap: 30px; }
+.contact-info, .contact-form { flex: 1; background: #2d2d44; padding: 20px; border-radius: 20px; }
+input, textarea { width: 90%; padding: 10px; margin: 10px 0; border-radius: 10px; border: none; background: #1e1e2f; color: white; }
+table { width: 100%; border-collapse: collapse; background: #2d2d44; border-radius: 15px; overflow: hidden; }
+th, td { padding: 10px; text-align: left; border-bottom: 1px solid #c084fc; }
+th { background: #c084fc; color: #1e1e2f; }
+.name-result { font-size: 1.3em; text-align: center; margin-top: 15px; color: #c084fc; }
+.hint { font-size: 0.8em; text-align: center; color: #aaa; margin-top: 10px; }
+@media (max-width: 700px) { .gallery-item, .contact-info, .contact-form { width: 100%; } .task-item { flex-direction: column; } }

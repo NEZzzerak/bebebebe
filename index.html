@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GameIdeas — главная</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="menu">
+        <a href="index.html" class="button">🎲 Генератор</a>
+        <a href="catalog.html" class="button">📚 Жанры</a>
+        <a href="gallery.html" class="button">🖼️ Галерея</a>
+        <a href="contacts.html" class="button">✉️ Контакты</a>
+    </div>
+
+    <div class="container">
+        <h1>🎮 Генератор идей для игр</h1>
+        
+        <div class="generator-block">
+            <h2>🎲 Случайная идея</h2>
+            <div class="idea-card" id="ideaCard">
+                👆 Нажми кнопку, чтобы получить концепт
+            </div>
+            <button class="action-btn" id="generateBtn">✨ Сгенерировать</button>
+            <button class="save-btn" id="saveBtn">📌 Добавить в список задач</button>
+        </div>
+
+        <div class="planner-block">
+            <h2>📋 Мои задачи</h2>
+            <div id="tasksList" class="tasks-list"></div>
+            <button class="reset-btn" id="clearBtn">🗑️ Очистить всё</button>
+            <p class="hint">💾 Задачи сохраняются в браузере автоматически</p>
+        </div>
+    </div>
+
+    <script>
+        // 15 сеттингов
+        const settings = ["Космос", "Средневековье", "Киберпанк", "Постапокалипсис", "Подводный мир", 
+                          "Древний Египет", "Викторианская Англия", "Дикий Запад", "Япония самураев", 
+                          "Зомби-апокалипсис", "Фэнтези", "Научная фантастика", "Подземелье", "Стимпанк", "Джунгли"];
+        
+        // 15 жанров
+        const genres = ["Рогалик", "Платформер", "Головоломка", "RPG", "Стелс", "Выживание", 
+                        "Симулятор", "Экшен", "Хоррор", "Метроидвания", "Квест", "Стратегия", 
+                        "Градостроитель", "Карточная игра", "Файтинг"];
+        
+        // 15 механик
+        const mechanics = ["крафт предметов", "прокачка персонажа", "строительство базы", "управление отрядом", 
+                           "торговля", "охота на боссов", "диалоги с выбором", "система репутации", 
+                           "разрушаемое окружение", "паркур", "скрытность", "взлом", "алхимия", 
+                           "мутации", "временные петли"];
+
+        let tasks = [];
+
+        function loadTasks() {
+            const saved = localStorage.getItem('gameTasks');
+            if (saved) tasks = JSON.parse(saved);
+            renderTasks();
+        }
+
+        function saveTasks() {
+            localStorage.setItem('gameTasks', JSON.stringify(tasks));
+            renderTasks();
+        }
+
+        function generateIdea() {
+            const setting = settings[Math.floor(Math.random() * settings.length)];
+            const genre = genres[Math.floor(Math.random() * genres.length)];
+            const mechanic = mechanics[Math.floor(Math.random() * mechanics.length)];
+            return `${setting} + ${genre}\n🎯 Механика: ${mechanic}`;
+        }
+
+        function renderTasks() {
+            const container = document.getElementById('tasksList');
+            if (tasks.length === 0) {
+                container.innerHTML = '<p class="empty-hint">📭 Пока нет задач. Сгенерируй идею и добавь!</p>';
+                return;
+            }
+            container.innerHTML = '';
+            tasks.forEach((task, i) => {
+                const div = document.createElement('div');
+                div.className = 'task-item';
+                div.innerHTML = `
+                    <div class="task-text">${task.text}</div>
+                    <button class="task-delete" data-id="${i}">❌ Удалить</button>
+                `;
+                container.appendChild(div);
+            });
+            document.querySelectorAll('.task-delete').forEach(btn => {
+                btn.onclick = () => {
+                    tasks.splice(parseInt(btn.dataset.id), 1);
+                    saveTasks();
+                };
+            });
+        }
+
+        let currentIdea = "";
+
+        document.getElementById('generateBtn').onclick = () => {
+            currentIdea = generateIdea();
+            document.getElementById('ideaCard').innerHTML = `<strong>💡 Концепт:</strong><br>${currentIdea.replace(/\n/g, '<br>')}`;
+        };
+
+        document.getElementById('saveBtn').onclick = () => {
+            if (!currentIdea) { alert("Сначала сгенерируй идею!"); return; }
+            tasks.push({ text: currentIdea });
+            saveTasks();
+            alert("✅ Добавлено в задачи!");
+        };
+
+        document.getElementById('clearBtn').onclick = () => {
+            if (confirm("Удалить все задачи?")) { tasks = []; saveTasks(); }
+        };
+
+        loadTasks();
+    </script>
+</body>
+</html>
+
